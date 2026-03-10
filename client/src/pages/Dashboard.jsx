@@ -76,7 +76,8 @@ function Dashboard() {
                 const config = {
                     headers: { Authorization: `Bearer ${user.token}` }
                 };
-                const { data } = await axios.get('http://localhost:5000/api/orders', config);
+                const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+                const { data } = await axios.get(`${baseUrl}/api/orders`, config);
                 setOrders(data);
             } catch (error) {
                 console.error(error);

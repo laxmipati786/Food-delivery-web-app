@@ -16,7 +16,8 @@ function ForgotPassword() {
         e.preventDefault();
         setLoading(true);
         try {
-            const { data } = await axios.post('http://localhost:5000/api/auth/forgot-password', { email });
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+            const { data } = await axios.post(`${baseUrl}/api/auth/forgot-password`, { email });
             toast.success(data.message);
             setStep(2);
         } catch (error) {
@@ -34,7 +35,8 @@ function ForgotPassword() {
         }
         setLoading(true);
         try {
-            const { data } = await axios.post('http://localhost:5000/api/auth/reset-password', {
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+            const { data } = await axios.post(`${baseUrl}/api/auth/reset-password`, {
                 email,
                 otp,
                 newPassword

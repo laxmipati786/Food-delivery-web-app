@@ -16,19 +16,22 @@ export const AuthProvider = ({ children }) => {
     }, []);
 
     const login = async (email, password) => {
-        const { data } = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+        const { data } = await axios.post(`${baseUrl}/api/auth/login`, { email, password });
         setUser(data);
         localStorage.setItem('userInfo', JSON.stringify(data));
         return data;
     };
 
     const signup = async (name, email, password, phone) => {
-        const { data } = await axios.post('http://localhost:5000/api/auth/signup', { name, email, password, phone });
+        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+        const { data } = await axios.post(`${baseUrl}/api/auth/signup`, { name, email, password, phone });
         return data;
     };
 
     const verifyOTP = async (email, otp) => {
-        const { data } = await axios.post('http://localhost:5000/api/auth/verify', { email, otp });
+        const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+        const { data } = await axios.post(`${baseUrl}/api/auth/verify`, { email, otp });
         setUser(data);
         localStorage.setItem('userInfo', JSON.stringify(data));
         return data;

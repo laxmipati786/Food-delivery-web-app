@@ -133,7 +133,8 @@ function Checkout() {
                 restaurant: restaurantId
             };
 
-            await axios.post('http://localhost:5000/api/orders', orderData, config);
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+            await axios.post(`${baseUrl}/api/orders`, orderData, config);
             clearCart();
             toast.success('Order Placed Successfully!');
             navigate('/dashboard');

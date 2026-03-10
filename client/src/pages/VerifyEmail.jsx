@@ -34,7 +34,8 @@ function VerifyEmail() {
 
         setIsResending(true);
         try {
-            const { data } = await axios.post('http://localhost:5000/api/auth/resend-email-otp', { email });
+            const baseUrl = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+            const { data } = await axios.post(`${baseUrl}/api/auth/resend-email-otp`, { email });
             toast.success(data.message || 'New OTP Sent!');
             setResendTimer(30); // reset timer
         } catch (error) {
